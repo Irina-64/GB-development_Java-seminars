@@ -4,26 +4,31 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import HW_09.alliance.*;
+import HW_09.*;
+
 public class Program {
     public static void main(String[] args) {
+        // Пример оформления заказа
+        Order order = createOrder("John");
 
-        // List<Integer> nums = new ArrayList<>();
-        // nums.add(1);
-        // nums.add(12);
-        // nums.add(123);
-        // nums.add(1234);
-        // nums.add(12345);
+        // Вывод информации о заказе
+        System.out.println(order);
+    }
 
-        // Iterator<Integer> iter = nums.iterator();
-        // while (iter.hasNext()) {
-        //     System.out.println(iter.next());
-        // }
+    public static Order createOrder(String customerName) {
+        Order order = new Order(customerName);
 
-        Worker worker = new Worker(
-            "Имя", "Фамилия", 23, 4567);
+        // Пример продуктов в наличии
+        Product coffee = new Product("Coffee", 3.5, 2);
+        Product milk = new Product("Milk", 2, 1.5);
+        Product tea = new Product("Tea", 2.2, 0);
 
-        //Iterator<Object> components = worker.iterator();
+        // Добавление продуктов в заказ
+        order.addProduct(coffee);
+        order.addProduct(milk);
+        order.addProduct(tea);
 
-        
+        return order;
     }
 }
