@@ -3,33 +3,25 @@ package HW_09;
 import java.util.HashMap;
 import java.util.Map;
 
-// Класс Beverage (Напиток) с полем volume (объем) и методом toString()
-public class Beverage {
-    private double volume;
+import HW_09.alliance.*;
+import HW_09.*;
 
-    public Beverage(double volume) {
-        this.volume = volume;
-    }
-
-    @Override
-    public String toString() {
-        return "Beverage [volume=" + volume + "]";
+public class Beverage extends Product {
+    public Beverage(String name, double price, double quantity, double weight, double volume) {
+        super(name, price, quantity, weight, volume);
     }
 }
 
-
-// Класс HotBeverage (Горячий напиток) - наследник Beverage - с дополнительным полем temperature (температура) и методом toString()
-public class HotBeverage extends Beverage {
+class HotBeverage extends Beverage {
     private int temperature;
 
-    public HotBeverage(double volume, int temperature) {
-        super(volume);
+    public HotBeverage(String name, double price, double quantity, double weight, double volume, int temperature) {
+        super(name, price, quantity, weight, volume);
         this.temperature = temperature;
     }
 
-    @Override
-    public String toString() {
-        return "HotBeverage [volume=" + getVolume() + ", temperature=" + temperature + "]";
+    public int getTemperature() {
+        return temperature;
     }
 }
 
@@ -46,5 +38,3 @@ public class Food {
         return "Food [weight=" + weight + "]";
     }
 }
-
-
