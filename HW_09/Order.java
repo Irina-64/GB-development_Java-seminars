@@ -2,54 +2,46 @@ package HW_09;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Map;
 
-class Product {
-    // ... остальной код ...
-
-    // Методы сравнения по различным критериям
-    public static Comparator<Product> weightComparator = Comparator.comparingDouble(Product::getWeight);
-    public static Comparator<Product> volumeComparator = Comparator.comparingDouble(Product::getVolume);
-
-    // ... остальной код ...
-}
-
-class HotBeverage extends Beverage {
-    // ... остальной код ...
-
-    // Метод сравнения по температуре
-    public static Comparator<HotBeverage> temperatureComparator = Comparator.comparingInt(HotBeverage::getTemperature);
-
-    // ... остальной код ...
-}
+import HW_09.alliance.*;
+import HW_09.*;
 
 class Order {
-    // ... остальной код ...
+    private List<Product> products = new ArrayList<>();
+    private double totalCost;
+    private String customerName;
+
+    public Order(String customerName) {
+        this.customerName = customerName;
+    }
+
+    public void addProduct(Product product) {
+        if (product.getQuantity() > 0) {
+            products.add(product);
+            totalCost += product.getPrice() * product.getQuantity();
+        }
+    }
+
+    public List<Product> getProducts() {
+        return products;
+    }
 
     // Метод сортировки продуктов в заказе по заданному критерию
     public void sortProducts(Comparator<Product> comparator) {
         products.sort(comparator);
     }
 
-    // ... остальной код ...
-}
-
-class HotBeverageVendingMachine extends VendingMachine {
-    // ... остальной код ...
-
-    // Метод проверки наличия продуктов в автомате перед оформлением заказа
-    public void validateOrder(Order order) {
-        List<Product> productsToRemove = new ArrayList<>();
-
-        for (Product product : order.getProducts()) {
-            Product availableProduct = products.get(product.getName());
-            if (availableProduct == null || availableProduct.getQuantity() < product.getQuantity()) {
-                productsToRemove.add(product);
-            }
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Order for ").append(customerName).append(":").append("\n");
+        for (Product product : products) {
+            sb.append(product.getName()).append(": ").append(product.getQuantity()).append("\n");
         }
-
-        order.getProducts().removeAll(productsToRemove);
+        sb.append("Total cost: ").append(totalCost);
+        return sb.toString();
     }
-
-    // ... остальной код ...
 }
-
