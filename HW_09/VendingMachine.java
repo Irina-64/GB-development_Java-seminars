@@ -2,34 +2,35 @@ package HW_09;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
+import HW_09.alliance.*;
+import HW_09.*;
 
 // Класс VendingMachine (Торговый автомат)
 public class VendingMachine {
-    private Map<String, Beverage> products = new HashMap<>();
+    protected Map<String, Product> products = new HashMap<>();
 
-    public void addProduct(String name, Beverage product) {
-        products.put(name, product);
-    }
-
-    public Beverage getProduct(String name) {
-        return products.get(name);
+    // Метод добавления продукта в автомат
+    public void addProduct(Product product) {
+        products.put(product.getName(), product);
     }
 }
 
-// Класс HotBeverageVendingMachine (Горячих напитков автомат) - наследник VendingMachine
-public class HotBeverageVendingMachine extends VendingMachine {
-    private Map<String, HotBeverage> hotBeverages = new HashMap<>();
+class HotBeverageVendingMachine extends VendingMachine {
 
-    public void addProduct(String name, HotBeverage hotBeverage) {
-        hotBeverages.put(name, hotBeverage);
-    }
+    // Метод проверки наличия продуктов в автомате перед оформлением заказа
+    public void validateOrder(Order order) {
+        List<Product> productsToRemove = new ArrayList<>();
 
-    public HotBeverage getProduct(String name, double volume, int temperature) {
-        HotBeverage hotBeverage = hotBeverages.get(name);
-        if (hotBeverage != null && hotBeverage.getVolume() == volume && hotBeverage.getTemperature() == temperature) {
-            return hotBeverage;
+        for (Product product : order.getProducts()) {
+            Product availableProduct = products.get(product.getName());
+            if (availableProduct == null || availableProduct.getQuantity() < product.getQuantity()) {
+                productsToRemove.add(product);
+            }
         }
-        return null;
+
+        order.getProducts().removeAll(productsToRemove);
     }
 }
