@@ -14,7 +14,11 @@ public class Beverage extends Product {
 
 class HotBeverage extends Beverage {
     private int temperature;
+    
+// Метод сравнения по температуре
+    public static Comparator<HotBeverage> temperatureComparator = Comparator.comparingInt(HotBeverage::getTemperature);
 
+    // Конструктор для класса HotBeverage
     public HotBeverage(String name, double price, double quantity, double weight, double volume, int temperature) {
         super(name, price, quantity, weight, volume);
         this.temperature = temperature;
