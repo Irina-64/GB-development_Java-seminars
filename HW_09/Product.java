@@ -21,6 +21,9 @@ class Product {
         this.volume = volume;
     }
 
+// Методы сравнения по различным критериям
+    public static Comparator<Product> weightComparator = Comparator.comparingDouble(Product::getWeight);
+    public static Comparator<Product> volumeComparator = Comparator.comparingDouble(Product::getVolume);
     public double getPrice() {
         return price;
     }
