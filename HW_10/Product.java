@@ -8,16 +8,12 @@ import HW_10.*;
 public abstract class Product {  
     private String name;
     private double price;
-    private double quantity;
-    private double weight;
-    private double volume;
+    private int quantity;
 
-    public Product(String name, double price, double quantity, double weight, double volume) {
+    public Product(String name, double price, int quantity) {
         this.name = name;
         this.price = price;
         this.quantity = quantity;
-        this.weight = weight;
-        this.volume = volume;
     }
 
     public static Comparator<Product> weightComparator = Comparator.comparingDouble(Product::getWeight);
